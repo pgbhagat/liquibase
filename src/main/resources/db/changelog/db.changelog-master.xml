@@ -15,8 +15,8 @@
 
     <createTable tableName="books"
       remarks="A table to contain all books">
-      <column name="id" type="int">
-        <constraints nullable="false" unique="true" primaryKey="true"/>
+      <column name="id" type="int" autoIncrement="true" incrementBy="1" startWith="1">
+        <constraints nullable="false" primaryKey="true"/>
       </column>
       <column name="name" type="varchar(255)">
         <constraints nullable="false" unique="true"/>
@@ -28,7 +28,7 @@
 
     <createTable tableName="authors"
       remarks="A table to contain all the authors">
-      <column name="id" type="int">
+      <column name="id" type="int" autoIncrement="true" incrementBy="1" startWith="1">
         <constraints nullable="false" primaryKey="true"/>
       </column>
       <column name="name" type="varchar(100)">
@@ -45,7 +45,7 @@
 
   <changeSet id="02" author="pbhagat">
     <insert tableName="authors">
-      <column name="id" valueNumeric="01"/>
+      <!--<column name="id" valueNumeric="01"/>-->
       <column name="name" value="Jimy"/>
     </insert>
   </changeSet>
@@ -53,11 +53,33 @@
 
   <changeSet id="03" author="pbhagat">
     <insert tableName="books">
-      <column name="id" valueNumeric="01"/>
+      <!--<column name="id" valueNumeric="01"/>-->
       <column name="name" value="Harry potter"/>
       <column name="author" valueNumeric="01"/>
     </insert>
   </changeSet>
 
+  <!--Works well if the datasource is oracle, fails for H2-->
+  <!--<changeSet id="04" author="pbhagat" runOnChange="true">
+    <sqlFile dbms="h2, oracle"
+      encoding="utf8"
+      endDelimiter="\nGO"
+      path="version_1_0/create_trigger.sql"
+      relativeToChangelogFile="true"
+      splitStatements="true"
+      stripComments="true"/>
+  </changeSet>-->
+
+
+  <!--Works well if the datasource is oracle, fails for H2-->
+  <!--<changeSet id="05" author="pbhagat" runOnChange="true">
+    <sqlFile dbms="h2, oracle"
+      encoding="utf8"
+      endDelimiter="\nGO"
+      path="version_1_0/create_procedure.sql"
+      relativeToChangelogFile="true"
+      splitStatements="true"
+      stripComments="true"/>
+  </changeSet>-->
 
 </databaseChangeLog>
